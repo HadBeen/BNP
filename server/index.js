@@ -9,6 +9,7 @@ import { GetLoggedInUserInfos } from "./handlers/user.js";
 
 import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/user.js";
+import demandeRoutes from "./routes/demande.js";
 
 const app = express();
 const port = process.env.BACK_PORT || 3001;
@@ -39,6 +40,7 @@ app.use(
 app.route("/").get(checkLogs, loggedIn, GetLoggedInUserInfos);
 app.use("/", authRoutes);
 app.use("/user", userRoutes);
+app.use("/demande", demandeRoutes);
 
 // error middleware
 app.use((err, req, res, next) => {

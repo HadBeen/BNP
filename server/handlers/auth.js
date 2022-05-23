@@ -21,7 +21,7 @@ export const Signup = async (req, res, next) => {
             );
             SendEmail(
                 req.user.email,
-                "Registered in the Algeria Game Challenge X platform",
+                "Registered in the platform",
                 EmailContent()
             ).catch((e) => console.error(e));
             next();

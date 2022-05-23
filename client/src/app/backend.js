@@ -40,6 +40,14 @@ const Api = createApi({
     editUser: builder.mutation({
       query: (body) => ({ url: '/user', method: 'PUT', body }),
     }),
+    // pending
+    getDemande: builder.mutation({
+      query: () => ({ url: '/demande', method: 'GET' }),
+    }),
+    // preverified
+    getDemandePreVerfied: builder.mutation({
+      query: () => ({ url: '/preverfied', method: 'GET' }),
+    }),
   }),
 });
 
@@ -50,5 +58,7 @@ export const {
   useLogOutMutation,
   useGetUserDataMutation,
   useEditUserMutation,
+  useGetDemandeMutation,
+  useGetDemandePreVerfiedMutation
 } = Api;
 export default Api;

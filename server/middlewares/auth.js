@@ -30,11 +30,12 @@ const isSameUser = async (req, res, next) => {
         message: "You can't edit someone else's profile",
     });
 };
-const isAdmin = async (req, res, next) => {
-    if (req.user.isAdmin) return next();
+const hasRole =(roles,same=false)=> async (req, res, next) => {
+    if (same && req.user === req.params.id) return next();
+    if (roles.includes(req.user.role)) return next();
     next({
         name: "Not allowed",
         message: "You don't have the privilege to do this action",
     });
 };
-export { loggedIn, isSameUser, isAdmin, checkLogs };
+export { loggedIn, isSameUser, hasRole, checkLogs };

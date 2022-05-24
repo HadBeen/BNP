@@ -41,7 +41,7 @@ const SectionStyle = styled(Card)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
-  margin: theme.spacing(2, 0, 2, 2),
+  margin: theme.spacing(2, 0, 2, 25),
 }));
 
 const ContentStyle = styled('div')(({ theme }) => ({
@@ -51,7 +51,7 @@ const ContentStyle = styled('div')(({ theme }) => ({
   display: 'flex',
   justifyContent: 'center',
   flexDirection: 'column',
-  padding: theme.spacing(12, 0),
+  padding: theme.spacing(20, 0),
 }));
 
 // ----------------------------------------------------------------------
@@ -64,20 +64,13 @@ export default function Register() {
   return (
     <Page title="Register">
       <RootStyle>
-        <HeaderStyle>
-          <Logo />
-          {smUp && (
-            <Typography variant="body2" sx={{ mt: { md: -2 } }}>
-              Already have an account?
-              <Link variant="subtitle2" component={RouterLink} to="/login">
-                Login
-              </Link>
-            </Typography>
-          )}
-        </HeaderStyle>
+        
 
         {mdUp && (
           <SectionStyle>
+              <HeaderStyle>
+              <Logo />
+            </HeaderStyle>
             <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
               Manage the job more effectively with {webconfig.DashboardName}
             </Typography>
@@ -93,30 +86,28 @@ export default function Register() {
 
             <Typography sx={{ color: 'text.secondary', mb: 5 }}>Free forever. No credit card needed.</Typography>
 
-            <AuthSocial />
-
             <RegisterForm />
 
             <Typography variant="body2" align="center" sx={{ color: 'text.secondary', mt: 3 }}>
-              By registering, I agree to Minimal&nbsp;
+              En vous inscrivant, vous déclarez avoir lu et accepter les  
               <Link underline="always" color="text.primary" href="#">
-                Terms of Service
+                 Conditions d'utilisateur
               </Link>
-              {''}and{''}
+              {' '}et la{' '}
               <Link underline="always" color="text.primary" href="#">
-                Privacy Policy
+                Politique de confidentialité.
               </Link>
               .
             </Typography>
 
-            {!smUp && (
+            
               <Typography variant="body2" sx={{ mt: 3, textAlign: 'center' }}>
-                Already have an account?{' '}
+                Vous avez déja un compte?{' '}
                 <Link variant="subtitle2" to="/login" component={RouterLink}>
-                  Login
+                  Connectez-vous.
                 </Link>
               </Typography>
-            )}
+            
           </ContentStyle>
         </Container>
       </RootStyle>

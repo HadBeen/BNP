@@ -26,17 +26,16 @@ import Iconify from '../components/Iconify';
 import SearchNotFound from '../components/SearchNotFound';
 import { ListHead, UserListToolbar, UserMoreMenu } from '../sections/@dashboard/user';
 // mock
-import USERLIST from '../_mock/user';
+// import USERLIST from '../_mock/user';
 
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
-  { id: 'name', label: 'Name', alignRight: false },
-  { id: 'company', label: 'Company', alignRight: false },
-  { id: 'role', label: 'Role', alignRight: false },
-  { id: 'isVerified', label: 'Verified', alignRight: false },
-  { id: 'status', label: 'Status', alignRight: false },
-  { id: '' },
+    { id: 'beneficier', label: 'A', alignRight: false },
+    { id: 'm_chiffre', label: 'Montant', alignRight: false },
+    { id: 'date_de_valeur', label: 'Le', alignRight: false },
+    { id: 'status', label: 'Status', alignRight: false },
+    { id: '' },
 ];
 
 // ----------------------------------------------------------------------
@@ -70,14 +69,59 @@ function applySortFilter(array, comparator, query) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-export default function User() {
+export default function Demande() {
+  const UserDemandeList = [
+    {
+        id: "1",
+        beneficier: 'beneficier1',
+        mChiffre: 15000.00,
+        dateDeValeur: '12/05/2022',
+        status: 'pending',
+    },
+    {
+        id: "2",
+        beneficier: 'beneficier2',
+        mChiffre: 15000.00,
+        dateDeValeur: '12/05/2022',
+        status: 'pending',
+    },
+    {
+        id: "3",
+        beneficier: 'beneficier3',
+        mChiffre: 15000.00,
+        dateDeValeur: '12/05/2022',
+        status: 'denied',
+    },
+    {
+        id: "4",
+        beneficier: 'beneficier4',
+        mChiffre: 15000.00,
+        dateDeValeur: '12/05/2022',
+        status: 'pending',
+    },
+    {
+        id: "5",
+        beneficier: 'beneficier5',
+        mChiffre: 15000.00,
+        dateDeValeur: '12/05/2022',
+        status: 'pending',
+    },
+    {
+        id: "6",
+        beneficier: 'beneficier6',
+        mChiffre: 15000.00,
+        dateDeValeur: '22/05/2022',
+        status: 'pending',
+    },
+  ];
+
   const [page, setPage] = useState(0);
 
   const [order, setOrder] = useState('asc');
 
   const [selected, setSelected] = useState([]);
 
-  const [orderBy, setOrderBy] = useState('name');
+  const [orderBy, setOrderBy] = useState('dateDeValeur');
 
   const [filterName, setFilterName] = useState('');
 
@@ -91,18 +135,18 @@ export default function User() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = USERLIST.map((n) => n.name);
+      const newSelecteds = UserDemandeList.map((n) => n.dateDeValeur);
       setSelected(newSelecteds);
       return;
     }
     setSelected([]);
   };
 
-  const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
+  const handleClick = (event, date) => {
+    const selectedIndex = selected.indexOf(date);
     let newSelected = [];
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
+      newSelected = newSelected.concat(selected, date);
     } else if (selectedIndex === 0) {
       newSelected = newSelected.concat(selected.slice(1));
     } else if (selectedIndex === selected.length - 1) {
@@ -122,30 +166,30 @@ export default function User() {
     setPage(0);
   };
 
-  const handleFilterByName = (event) => {
+  const handleFilterByDate = (event) => {
     setFilterName(event.target.value);
   };
 
-  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - USERLIST.length) : 0;
+  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - UserDemandeList.length) : 0;
 
-  const filteredUsers = applySortFilter(USERLIST, getComparator(order, orderBy), filterName);
+  const filteredDemandes = applySortFilter(UserDemandeList, getComparator(order, orderBy), filterName);
 
-  const isUserNotFound = filteredUsers.length === 0;
+  const isDemandeNotFound = filteredDemandes.length === 0;
 
   return (
     <Page title="User">
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
-            User
+            Vos demandes de transfert libre
           </Typography>
           <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
-            New User
+            nouvelle demande
           </Button>
         </Stack>
 
         <Card>
-          <UserListToolbar numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByName} />
+          <UserListToolbar numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByDate} />
 
           <Scrollbar>
             <TableContainer sx={{ minWidth: 800 }}>
@@ -154,15 +198,15 @@ export default function User() {
                   order={order}
                   orderBy={orderBy}
                   headLabel={TABLE_HEAD}
-                  rowCount={USERLIST.length}
+                  rowCount={UserDemandeList.length}
                   numSelected={selected.length}
                   onRequestSort={handleRequestSort}
                   onSelectAllClick={handleSelectAllClick}
                 />
                 <TableBody>
-                  {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { id, name, role, status, company, avatarUrl, isVerified } = row;
-                    const isItemSelected = selected.indexOf(name) !== -1;
+                  {filteredDemandes.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                    const { id, beneficier, mChiffre,dateDeValeur,  status } = row;
+                    const isItemSelected = selected.indexOf(dateDeValeur) !== -1;
 
                     return (
                       <TableRow
@@ -174,21 +218,21 @@ export default function User() {
                         aria-checked={isItemSelected}
                       >
                         <TableCell padding="checkbox">
-                          <Checkbox checked={isItemSelected} onChange={(event) => handleClick(event, name)} />
+                          <Checkbox checked={isItemSelected} onChange={(event) => handleClick(event, dateDeValeur)} />
                         </TableCell>
-                        <TableCell component="th" scope="row" padding="none">
+                        {/* <TableCell component="th" scope="row" padding="none">
                           <Stack direction="row" alignItems="center" spacing={2}>
-                            <Avatar alt={name} src={avatarUrl} />
+                            <Avatar alt={date_de_valeur} src={avatarUrl} />
                             <Typography variant="subtitle2" noWrap>
-                              {name}
+                              {date_de_valeur}
                             </Typography>
                           </Stack>
-                        </TableCell>
-                        <TableCell align="left">{company}</TableCell>
-                        <TableCell align="left">{role}</TableCell>
-                        <TableCell align="left">{isVerified ? 'Yes' : 'No'}</TableCell>
+                        </TableCell> */}
+                        <TableCell align="left">{beneficier}</TableCell>
+                        <TableCell align="left">{mChiffre}</TableCell>
+                        <TableCell align="left">{dateDeValeur}</TableCell>
                         <TableCell align="left">
-                          <Label variant="ghost" color={(status === 'banned' && 'error') || 'success'}>
+                          <Label variant="ghost" color={(status === 'denied' && 'error') || 'success'}>
                             {sentenceCase(status)}
                           </Label>
                         </TableCell>
@@ -206,7 +250,7 @@ export default function User() {
                   )}
                 </TableBody>
 
-                {isUserNotFound && (
+                {isDemandeNotFound && (
                   <TableBody>
                     <TableRow>
                       <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
@@ -222,7 +266,7 @@ export default function User() {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={USERLIST.length}
+            count={UserDemandeList.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

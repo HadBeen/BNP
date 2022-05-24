@@ -1,8 +1,8 @@
 import * as Yup from 'yup';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useFormik, Form, FormikProvider } from 'formik';
 // material
-import { Stack, TextField, IconButton, InputAdornment } from '@mui/material';
+import { Stack, TextField, IconButton, InputAdornment ,FormControl,FormLabel,RadioGroup,FormControlLabel,Radio} from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 // component
 import Iconify from '../../../components/Iconify';
@@ -21,7 +21,13 @@ export default function RegisterForm() {
     lastName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Last name required'),
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
     password: Yup.string().required('Password is required'),
+
   });
+
+
+  const[gender,setGender]= useState('H');
+
+
 
   const formik = useFormik({
     initialValues: {
@@ -29,6 +35,7 @@ export default function RegisterForm() {
       lastName: '',
       email: '',
       password: '',
+      gender: ''
     },
     validationSchema: RegisterSchema,
     onSubmit: (body) => {
@@ -36,8 +43,8 @@ export default function RegisterForm() {
         .unwrap()
         .then((user) => {
           Notify({
-            title: 'You have Registered in the platform',
-            description: 'Welcome among us! you can check the dashboard for news',
+            title: 'Inscription avec succés !',
+            description: 'Bienvenue parmis nous, jetez un oeil au tableau de bord et faite votre premiére demande de transfert libre',
             type: 'success',
           });
           setUser(user);
@@ -98,6 +105,30 @@ export default function RegisterForm() {
             error={Boolean(touched.password && errors.password)}
             helperText={touched.password && errors.password}
           />
+
+        {/* <FormControl>
+          <FormLabel id="demo-radio-buttons-group-label">Sexe</FormLabel>
+          <RadioGroup
+            aria-labelledby="demo-radio-buttons-group-label"
+            defaultValue="H"
+            name="gender"
+            row 
+          >
+            <FormControlLabel value="H" control={<Radio />} label="Homme" />
+            <FormControlLabel value="F" control={<Radio />} label="Femme"/>
+
+      
+          </RadioGroup>
+        </FormControl> */}
+
+<FormControl id="demo-radio-buttons-group-label">
+          <FormLabel>sexe</FormLabel>
+          <RadioGroup value={gender} onChange={(e) => setGender(e.target.value)}>
+            <FormControlLabel value="F" control={<Radio />} label="Femme" />
+            <FormControlLabel value="H" control={<Radio />} label="Homme" />
+ 
+          </RadioGroup>
+        </FormControl>
 
           <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isLoading}>
             Register

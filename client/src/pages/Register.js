@@ -81,10 +81,10 @@ export default function Register() {
         <Container>
           <ContentStyle>
             <Typography variant="h4" gutterBottom>
-              Register in {webconfig.DashboardName}
+              Inscrivez-vous à {webconfig.DashboardName}
             </Typography>
 
-            <Typography sx={{ color: 'text.secondary', mb: 5 }}>Free forever. No credit card needed.</Typography>
+            <Typography sx={{ color: 'text.secondary', mb: 5 }}>Soyez les bienvenus</Typography>
 
             <RegisterForm />
 

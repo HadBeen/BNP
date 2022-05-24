@@ -3,6 +3,7 @@ import { Navigate, useRoutes } from 'react-router-dom';
 import DashboardLayout from './layouts/dashboard';
 import User from './pages/User';
 import Demande from './pages/UserDemande';
+import ALLDemande from './pages/AllDemandes';
 import Login from './pages/Login';
 import NotFound from './pages/Page404';
 import Register from './pages/Register';
@@ -26,7 +27,10 @@ export default function Router() {
       children: [
         { path: '', element: <DashboardApp /> },
         // { path: 'users', element: <User /> },
-        { path: 'users', element: <Demande /> },
+        // { path: 'users', element: <Demande /> },
+       // { path: 'users', element: <ALLDemande status='verfied' /> },
+       (user.role === 'CFA') ? { path: 'users', element: <ALLDemande status='preVerfied' /> }:   { path: 'users', element: <Demande /> },
+       (user.role === 'VFO') ? { path: 'users', element: <ALLDemande status='pending' /> } :   { path: 'users', element: <Demande /> },
         { path: 'products', element: <Products /> },
         { path: 'blog', element: <Blog /> },
         { path: '*', element: <NotFound /> },

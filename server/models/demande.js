@@ -56,7 +56,7 @@ const demandeSchema = new mongoose.Schema({
             minlength: 5,
             maxlength: 5,
         },
-        racin: {
+        racine: {
             type: String,
             minlength: 6,
             maxlength: 6,

@@ -24,7 +24,8 @@ import Label from '../components/Label';
 import Scrollbar from '../components/Scrollbar';
 import Iconify from '../components/Iconify';
 import SearchNotFound from '../components/SearchNotFound';
-import { ListHead, UserListToolbar, UserMoreMenu } from '../sections/@dashboard/user';
+import { ListHead, ListToolbar, MoreMenu } from '../sections/@dashboard/user';
+import {DemandeList as UserDemandeList} from '../testData';
 // mock
 // import USERLIST from '../_mock/user';
 
@@ -64,56 +65,13 @@ function applySortFilter(array, comparator, query) {
     return a[1] - b[1];
   });
   if (query) {
-    return filter(array, (_user) => _user.name.toLowerCase().indexOf(query.toLowerCase()) !== -1);
+    return filter(array, (demande) => demande.dateDeValeur.toLowerCase().indexOf(query.toLowerCase()) !== -1);
   }
   return stabilizedThis.map((el) => el[0]);
 }
 
 export default function Demande() {
-  const UserDemandeList = [
-    {
-        id: "1",
-        beneficier: 'beneficier1',
-        mChiffre: 15000.00,
-        dateDeValeur: '12/05/2022',
-        status: 'pending',
-    },
-    {
-        id: "2",
-        beneficier: 'beneficier2',
-        mChiffre: 15000.00,
-        dateDeValeur: '12/05/2022',
-        status: 'pending',
-    },
-    {
-        id: "3",
-        beneficier: 'beneficier3',
-        mChiffre: 15000.00,
-        dateDeValeur: '12/05/2022',
-        status: 'denied',
-    },
-    {
-        id: "4",
-        beneficier: 'beneficier4',
-        mChiffre: 15000.00,
-        dateDeValeur: '12/05/2022',
-        status: 'pending',
-    },
-    {
-        id: "5",
-        beneficier: 'beneficier5',
-        mChiffre: 15000.00,
-        dateDeValeur: '12/05/2022',
-        status: 'pending',
-    },
-    {
-        id: "6",
-        beneficier: 'beneficier6',
-        mChiffre: 15000.00,
-        dateDeValeur: '22/05/2022',
-        status: 'pending',
-    },
-  ];
+
 
   const [page, setPage] = useState(0);
 
@@ -189,7 +147,7 @@ export default function Demande() {
         </Stack>
 
         <Card>
-          <UserListToolbar numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByDate} />
+          <ListToolbar numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByDate} />
 
           <Scrollbar>
             <TableContainer sx={{ minWidth: 800 }}>
@@ -238,7 +196,7 @@ export default function Demande() {
                         </TableCell>
 
                         <TableCell align="right">
-                          <UserMoreMenu />
+                          <MoreMenu />
                         </TableCell>
                       </TableRow>
                     );

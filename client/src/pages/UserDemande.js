@@ -35,7 +35,7 @@ const TABLE_HEAD = [
     { id: 'beneficier', label: 'A', alignRight: false },
     { id: 'm_chiffre', label: 'Montant', alignRight: false },
     { id: 'date_de_valeur', label: 'Le', alignRight: false },
-    { id: 'status', label: 'Status', alignRight: false },
+    { id: 'statue', label: 'statue', alignRight: false },
     { id: '' },
 ];
 
@@ -163,7 +163,7 @@ export default function Demande() {
                 />
                 <TableBody>
                   {filteredDemandes.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { id, beneficier, mChiffre,dateDeValeur,  status } = row;
+                    const { id, beneficier, mChiffre,dateDeValeur,  statue } = row;
                     const isItemSelected = selected.indexOf(dateDeValeur) !== -1;
 
                     return (
@@ -190,8 +190,8 @@ export default function Demande() {
                         <TableCell align="left">{mChiffre}</TableCell>
                         <TableCell align="left">{dateDeValeur}</TableCell>
                         <TableCell align="left">
-                          <Label variant="ghost" color={(status === 'denied' && 'error') || 'success'}>
-                            {sentenceCase(status)}
+                          <Label variant="ghost" color={(statue === 'denied' && 'error') || 'success'}>
+                            {sentenceCase(statue)}
                           </Label>
                         </TableCell>
 

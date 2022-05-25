@@ -6,7 +6,7 @@ export const DemandeList = [
         mChiffre: 15000.00,
         dateDeValeur: '12/05/2022',
         banqueBenificiaire: "b 1",
-        status: 'pending',
+        statue: 'pending',
     },
     {
         id: "2",
@@ -15,7 +15,7 @@ export const DemandeList = [
         mChiffre: 15000.00,
         dateDeValeur: '12/05/2022',
         banqueBenificiaire: "b 2",
-        status: 'preVerfied',
+        statue: 'preVerfied',
     },
     {
         id: "3",
@@ -24,7 +24,7 @@ export const DemandeList = [
         mChiffre: 15000.00,
         dateDeValeur: '12/05/2022',
         banqueBenificiaire: "b 3",
-        status: 'verfied',
+        statue: 'verfied',
     },
     {
         id: "4",
@@ -33,7 +33,7 @@ export const DemandeList = [
         mChiffre: 15000.00,
         dateDeValeur: '12/05/2022',
         banqueBenificiaire: "b 4",
-        status: 'preVerfied',
+        statue: 'preVerfied',
     },
     {
         id: "5",
@@ -42,7 +42,7 @@ export const DemandeList = [
         mChiffre: 15000.00,
         dateDeValeur: '12/05/2022',
         banqueBenificiaire: "b 5",
-        status: 'pending',
+        statue: 'pending',
     },
     {
         id: "6",
@@ -51,7 +51,7 @@ export const DemandeList = [
         mChiffre: 15000.00,
         dateDeValeur: '22/05/2022',
         banqueBenificiaire: "b 6",
-        status: 'pending',
+        statue: 'pending',
     },
 ];
 

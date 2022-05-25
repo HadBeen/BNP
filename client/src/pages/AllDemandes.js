@@ -135,10 +135,10 @@ export default function AllDemandes(props) {
 
 
   const filtre = ()=> {
-      console.log(props.status);
-    if(props.status === "pending") return filteredUsers.filter((demande) => demande.status === "pending");
-    if(props.status === "preVerfied") return filteredUsers.filter((demande) => demande.status === "preVerfied");
-    if(props.status === "verfied") return filteredUsers.filter((demande) => demande.status === "verfied");
+      console.log(props.statue);
+    if(props.statue === "pending") return filteredUsers.filter((demande) => demande.statue === "pending");
+    if(props.statue === "preVerfied") return filteredUsers.filter((demande) => demande.statue === "preVerfied");
+    if(props.statue === "verfied") return filteredUsers.filter((demande) => demande.statue === "verfied");
 }
 
   const filteredData = filtre();
@@ -174,7 +174,7 @@ export default function AllDemandes(props) {
                 />
                 <TableBody>
                   {filteredData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { id,userName,  mChiffre,dateDeValeur,banqueBenificiaire,  status } = row;
+                    const { id,userName,  mChiffre,dateDeValeur,banqueBenificiaire,  statue } = row;
                     const isItemSelected = selected.indexOf(userName) !== -1;
 
                     return (

@@ -18,13 +18,13 @@
   <defs>
     <linearGradient id="prefix__paint0_linear" x1="328.81" y1="424.032" x2="505.393" y2="26.048"
       gradientUnits="userSpaceOnUse">
-      <stop stop-color="#2065D1" />
-      <stop offset="1" stop-color="#2065D1" stop-opacity=".01" />
+      <stop stopColor="#2065D1" />
+      <stop offset="1" stopColor="#2065D1" stop-opacity=".01" />
     </linearGradient>
     <linearGradient id="prefix__paint1_linear" x1="135.297" y1="97.623" x2="182.109" y2="144.436"
       gradientUnits="userSpaceOnUse">
-      <stop stop-color="#FFE16A" />
-      <stop offset="1" stop-color="#B78103" />
+      <stop stopColor="#FFE16A" />
+      <stop offset="1" stopColor="#B78103" />
     </linearGradient>
     <filter id="prefix__filter0_d" x="51" y="49" width="394.621" height="277.611" filterUnits="userSpaceOnUse"
       color-interpolation-filters="sRGB">

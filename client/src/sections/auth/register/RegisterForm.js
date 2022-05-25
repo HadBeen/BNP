@@ -4,17 +4,35 @@ import { useFormik, Form, FormikProvider } from 'formik';
 // material
 import { Stack, TextField, IconButton, InputAdornment } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+import Box from '@mui/material/Box';
+import MenuItem from '@mui/material/MenuItem';
 // component
 import Iconify from '../../../components/Iconify';
 import { useSignUpMutation } from '../../../app/backend';
 import { useNotification, useUser } from '../../../hooks';
 
+// ------------------------------gender----------------------------------
+const genders = [
+  {
+    value: 'F',
+    label: 'Femme',
+  },
+  {
+    value: 'H',
+    label: 'Homme',
+  },
+];
 // ----------------------------------------------------------------------
 
 export default function RegisterForm() {
+  const [gender, setGender] = useState('Femme');
+  const handleChange = (event) => {
+    setGender(event.target.value);
+  };
   const [showPassword, setShowPassword] = useState(false);
   const [SignUp, { isLoading }] = useSignUpMutation();
   const { setUser } = useUser();
+
   const { Notify, Errofy } = useNotification();
   const RegisterSchema = Yup.object().shape({
     firstName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('First name required'),
@@ -27,6 +45,7 @@ export default function RegisterForm() {
     initialValues: {
       firstName: '',
       lastName: '',
+      gender: '',
       email: '',
       password: '',
     },
@@ -69,7 +88,35 @@ export default function RegisterForm() {
               helperText={touched.lastName && errors.lastName}
             />
           </Stack>
+          {/* gender debut  */}
 
+          <Box
+            component="form"
+            sx={{
+              '& .MuiTextField-root': { m: 1, width: '25ch' },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <div>
+              <TextField
+                select
+                label="Sexe"
+                value={gender}
+                onChange={handleChange}
+                {...getFieldProps('gender')}
+                error={Boolean(touched.gender && errors.gender)}
+                helperText={touched.gender && errors.gender}
+              >
+                {genders.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
+            </div>
+          </Box>
+          {/* gender fin */}
           <TextField
             fullWidth
             autoComplete="username"
@@ -79,7 +126,6 @@ export default function RegisterForm() {
             error={Boolean(touched.email && errors.email)}
             helperText={touched.email && errors.email}
           />
-
           <TextField
             fullWidth
             autoComplete="current-password"
@@ -98,7 +144,6 @@ export default function RegisterForm() {
             error={Boolean(touched.password && errors.password)}
             helperText={touched.password && errors.password}
           />
-
           <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isLoading}>
             Register
           </LoadingButton>
@@ -107,3 +152,4 @@ export default function RegisterForm() {
     </FormikProvider>
   );
 }
+

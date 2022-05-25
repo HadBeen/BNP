@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema(
     gender: {
       type: String,
       enum: ["H", "F"],
-      required: true,
+      default: "H",
     },
     valid: { type: Boolean, default: false },
     isAdmin: { type: Boolean, default: false },

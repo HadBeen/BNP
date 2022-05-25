@@ -41,7 +41,7 @@ const SectionStyle = styled(Card)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
-  margin: theme.spacing(2, 0, 2, 2),
+  margin: theme.spacing(2, 0, 2, 25),
 }));
 
 const ContentStyle = styled('div')(({ theme }) => ({
@@ -51,36 +51,29 @@ const ContentStyle = styled('div')(({ theme }) => ({
   display: 'flex',
   justifyContent: 'center',
   flexDirection: 'column',
-  padding: theme.spacing(12, 0),
+  padding: theme.spacing(17, 0),
 }));
 
 // ----------------------------------------------------------------------
 
 export default function Login() {
-  const smUp = useResponsive('up', 'sm');
-
   const mdUp = useResponsive('up', 'md');
 
   return (
     <Page title="Login">
       <RootStyle>
-        <HeaderStyle>
+        {/* <HeaderStyle>
           <Logo />
-
-          {smUp && (
-            <Typography variant="body2" sx={{ mt: { md: -2 } }}>
-              Don’t have an account? {''}
-              <Link variant="subtitle2" component={RouterLink} to="/register">
-                Get started
-              </Link>
-            </Typography>
-          )}
-        </HeaderStyle>
+        </HeaderStyle> */}
 
         {mdUp && (
           <SectionStyle>
-            <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
-              Hi, Welcome Back
+            <HeaderStyle>
+              <Logo />
+            </HeaderStyle>
+            
+            <Typography variant="h3" sx={{ px: 7, mt: 10, mb: 2 }}>
+              Ravie de vous revoir !
             </Typography>
             <img src="/static/illustrations/illustration_login.png" alt="login" />
           </SectionStyle>
@@ -89,23 +82,20 @@ export default function Login() {
         <Container maxWidth="sm">
           <ContentStyle>
             <Typography variant="h4" gutterBottom>
-              Sign in to {webconfig.DashboardName}
+            Connectez-vous à {webconfig.DashboardName}
             </Typography>
 
-            <Typography sx={{ color: 'text.secondary', mb: 5 }}>Enter your details below.</Typography>
-
-            <AuthSocial />
+            <Typography sx={{ color: 'text.secondary', mb: 5 }}>Entrer vos informations :</Typography>
 
             <LoginForm />
-
-            {!smUp && (
+            
               <Typography variant="body2" align="center" sx={{ mt: 3 }}>
-                Don’t have an account?{' '}
+                Vous n'avez pas de compte? {''}
                 <Link variant="subtitle2" component={RouterLink} to="/register">
-                  Get started
+                  Inscrivez-vous
                 </Link>
               </Typography>
-            )}
+            
           </ContentStyle>
         </Container>
       </RootStyle>

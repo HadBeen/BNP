@@ -28,12 +28,20 @@ const GREY = {
   500_80: alpha('#919EAB', 0.8),
 };
 
+// const PRIMARY = {
+//   lighter: '#D1E9FC',
+//   light: '#76B0F1',
+//   main: '#2065D1',
+//   dark: '#103996',
+//   darker: '#061B64',
+//   contrastText: '#fff',
+// };
 const PRIMARY = {
-  lighter: '#D1E9FC',
-  light: '#76B0F1',
-  main: '#2065D1',
-  dark: '#103996',
-  darker: '#061B64',
+  lighter: '#fefefe',
+  light: '#bcd0d1',
+  main: '#005c4f',
+  dark: '#fe9845',
+  darker: '#196057',
   contrastText: '#fff',
 };
 

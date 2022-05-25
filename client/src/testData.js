@@ -1,0 +1,58 @@
+export const DemandeList = [
+    {
+        id: "1",
+        userName: "user user",
+        beneficier: 'beneficier1',
+        mChiffre: 15000.00,
+        dateDeValeur: '12/05/2022',
+        banqueBenificiaire: "b 1",
+        statue: 'pending',
+    },
+    {
+        id: "2",
+        userName: "user user",
+        beneficier: 'beneficier2',
+        mChiffre: 15000.00,
+        dateDeValeur: '12/05/2022',
+        banqueBenificiaire: "b 2",
+        statue: 'preVerfied',
+    },
+    {
+        id: "3",
+        userName: "user user",
+        beneficier: 'beneficier3',
+        mChiffre: 15000.00,
+        dateDeValeur: '12/05/2022',
+        banqueBenificiaire: "b 3",
+        statue: 'verfied',
+    },
+    {
+        id: "4",
+        userName: "user user",
+        beneficier: 'beneficier4',
+        mChiffre: 15000.00,
+        dateDeValeur: '12/05/2022',
+        banqueBenificiaire: "b 4",
+        statue: 'preVerfied',
+    },
+    {
+        id: "5",
+        userName: "user user",
+        beneficier: 'beneficier5',
+        mChiffre: 15000.00,
+        dateDeValeur: '12/05/2022',
+        banqueBenificiaire: "b 5",
+        statue: 'pending',
+    },
+    {
+        id: "6",
+        userName: "user user",
+        beneficier: 'beneficier6',
+        mChiffre: 15000.00,
+        dateDeValeur: '22/05/2022',
+        banqueBenificiaire: "b 6",
+        statue: 'pending',
+    },
+];
+
+ 

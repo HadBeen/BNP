@@ -152,3 +152,4 @@ export default function RegisterForm() {
     </FormikProvider>
   );
 }
+

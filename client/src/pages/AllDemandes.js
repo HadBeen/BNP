@@ -1,11 +1,15 @@
 import { filter } from 'lodash';
+import { sentenceCase } from 'change-case';
 import { useState } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
+
 // material
 import {
   Card,
   Table,
   Stack,
-
+  Avatar,
+  Button,
   Checkbox,
   TableRow,
   TableBody,
@@ -17,11 +21,14 @@ import {
 } from '@mui/material';
 // components
 import Page from '../components/Page';
+import Label from '../components/Label';
 import Scrollbar from '../components/Scrollbar';
+import Iconify from '../components/Iconify';
 import SearchNotFound from '../components/SearchNotFound';
 import { ListHead, ListToolbar, MoreMenu } from '../sections/@dashboard/user';
+import {DemandeList} from '../testData';
 // mock
-// import USERLIST from '../_mock/user';
+// import DemandeList from '../_mock/user';
 
 // ----------------------------------------------------------------------
 
@@ -35,37 +42,7 @@ const TABLE_HEAD = [
 
 // ----------------------------------------------------------------------
 
-const USERLIST = [
-  {
-      id: "1",
-      fistName: 'fstn 1',
-      lastName: 'lstn 1',
-      email: "aaa@gmail.com",
-      nbrDemandes: 5,
-  },
-  {
-      id: "2",
-      fistName: 'fstn 2',
-      lastName: 'lstn 2',
-      email: "aaa@gmail.com",
-      nbrDemandes: 4,
-  },
-  {
-      id: "3",
-      fistName: 'fstn 3',
-      lastName: 'lstn 3',
-      email: "aaa@gmail.com",
-      nbrDemandes: 7,
-  },
-  {
-      id: "4",
-      fistName: 'fstn 4',
-      lastName: 'lstn 4',
-      email: "aaa@gmail.com",
-      nbrDemandes: 1,
-  },
- 
-];
+
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -91,19 +68,19 @@ function applySortFilter(array, comparator, query) {
     return a[1] - b[1];
   });
   if (query) {
-    return filter(array, (_user) => _user.lastName.toLowerCase().indexOf(query.toLowerCase()) !== -1);
+    return filter(array, (demande) => demande.userName.toLowerCase().indexOf(query.toLowerCase()) !== -1);
   }
   return stabilizedThis.map((el) => el[0]);
 }
 
-export default function User() {
+export default function AllDemandes(props) {
   const [page, setPage] = useState(0);
 
   const [order, setOrder] = useState('asc');
 
   const [selected, setSelected] = useState([]);
 
-  const [orderBy, setOrderBy] = useState('lastName');
+  const [orderBy, setOrderBy] = useState('userName');
 
   const [filterName, setFilterName] = useState('');
 
@@ -117,7 +94,7 @@ export default function User() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = USERLIST.map((n) => n.lastName);
+      const newSelecteds = DemandeList.map((n) => n.userName);
       setSelected(newSelecteds);
       return;
     }
@@ -152,18 +129,28 @@ export default function User() {
     setFilterName(event.target.value);
   };
 
-  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - USERLIST.length) : 0;
+  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - DemandeList.length) : 0;
 
-  const filteredUsers = applySortFilter(USERLIST, getComparator(order, orderBy), filterName);
+  const filteredUsers = applySortFilter(DemandeList, getComparator(order, orderBy), filterName);
 
-  const isUserNotFound = filteredUsers.length === 0;
+
+  const filtre = ()=> {
+      console.log(props.statue);
+    if(props.statue === "pending") return filteredUsers.filter((demande) => demande.statue === "pending");
+    if(props.statue === "preVerfied") return filteredUsers.filter((demande) => demande.statue === "preVerfied");
+    if(props.statue === "verfied") return filteredUsers.filter((demande) => demande.statue === "verfied");
+}
+
+  const filteredData = filtre();
+
+  const isUserNotFound = filteredData.length === 0;
 
   return (
     <Page title="User">
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
-            Clients
+            Demandes
           </Typography>
           {/* <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
             Ajouter un client
@@ -180,15 +167,15 @@ export default function User() {
                   order={order}
                   orderBy={orderBy}
                   headLabel={TABLE_HEAD}
-                  rowCount={USERLIST.length}
+                  rowCount={DemandeList.length}
                   numSelected={selected.length}
                   onRequestSort={handleRequestSort}
                   onSelectAllClick={handleSelectAllClick}
                 />
                 <TableBody>
-                  {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { id, lastName, fistName, email, nbrDemandes} = row;
-                    const isItemSelected = selected.indexOf(lastName) !== -1;
+                  {filteredData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                    const { id,userName,  mChiffre,dateDeValeur,banqueBenificiaire,  statue } = row;
+                    const isItemSelected = selected.indexOf(userName) !== -1;
 
                     return (
                       <TableRow
@@ -200,7 +187,7 @@ export default function User() {
                         aria-checked={isItemSelected}
                       >
                         <TableCell padding="checkbox">
-                          <Checkbox checked={isItemSelected} onChange={(event) => handleClick(event, lastName)} />
+                          <Checkbox checked={isItemSelected} onChange={(event) => handleClick(event, userName)} />
                         </TableCell>
                         {/* <TableCell component="th" scope="row" padding="none">
                           <Stack direction="row" alignItems="center" spacing={2}>
@@ -210,10 +197,10 @@ export default function User() {
                             </Typography>
                           </Stack>
                         </TableCell> */}
-                        <TableCell align="left">{lastName}</TableCell>
-                        <TableCell align="left">{fistName}</TableCell>
-                        <TableCell align="left">{email}</TableCell>
-                        <TableCell align="left">{nbrDemandes}</TableCell>
+                        <TableCell align="left">{userName}</TableCell>
+                        <TableCell align="left">{mChiffre}</TableCell>
+                        <TableCell align="left">{dateDeValeur}</TableCell>
+                        <TableCell align="left">{banqueBenificiaire}</TableCell>
 
                         <TableCell align="right">
                           <MoreMenu />
@@ -244,7 +231,7 @@ export default function User() {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={USERLIST.length}
+            count={filteredData.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

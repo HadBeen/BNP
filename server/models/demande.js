@@ -12,34 +12,41 @@ const demandeSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+
     m_chiffre: {
         required: true,
         type: Number,
         min: 0,
     },
+
     ref_paiement: {
         required: true,
         type: String,
     },
+
     debit: {
         type: Number,
         min: 1,
         max: 2,
     },
+
     virement_par: {
         type: Number,
         min: 1,
         max: 3,
     },
+
     frais: {
         type: Number,
         min: 1,
         max: 3,
     },
+
     date_de_valeur: {
         type: Date,
         required: true,
     },
+    
     num_transaction: {
         date: {
             type: Date,
@@ -49,7 +56,7 @@ const demandeSchema = new mongoose.Schema({
             minlength: 5,
             maxlength: 5,
         },
-        racin: {
+        racine: {
             type: String,
             minlength: 6,
             maxlength: 6,
@@ -70,51 +77,62 @@ const demandeSchema = new mongoose.Schema({
             maxlength: 3,
         },
     },
+
     nature_de_paiement: {
         type: String,
         required: true,
     },
+
     num_dom: {
         required: true,
         type: String,
         unique: true,
     },
+
     benificier: {
         nom: {
             type: String,
             required: true,
         },
+
         prenom: {
             type: String,
             required: true,
         },
+        
         num_cmpt: {
             type: String,
             required: true,
         },
+        
         address_cmplt: {
             type: String,
             required: true,
         },
+        
         nom_banque: {
             required: true,
             type: String,
         },
+        
         adr_swift: {
             required: true,
             type: String,
         },
     },
-    expatrie: {
+
+    expatrier: {
         required: true,
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
     },
+
     statue: {
         type: String,
         enum: ["verified", "pre-verfied", "denied", "pending"],
         default: "pending",
     },
+
     capture_blocage: { type: String },
     piece_jointe: {
         contrat: {

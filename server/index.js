@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import mongoose from "mongoose";
 import morgan from "morgan";
+import multer from "multer";
 
 import { loggedIn, checkLogs } from "./middlewares/auth.js";
 import { GetLoggedInUserInfos } from "./handlers/user.js";
@@ -14,16 +15,15 @@ import demandeRoutes from "./routes/demande.js";
 
 const app = express();
 const port = process.env.BACK_PORT || 3001;
-const multer = require("multer");
 
-const storage = multer.diskStorage({
-  destination: function (req, file, callback) {
-    callback(null, "/pieceJointe");
-  },
-  filename: function (req, file, callback) {
-    callback(null, file.fieldname);
-  },
-});
+// const storage = multer.diskStorage({
+//   destination: function (req, file, callback) {
+//     callback(null, "/pieceJointe");
+//   },
+//   filename: function (req, file, callback) {
+//     callback(null, file.fieldname);
+//   },
+// });
 
 app.use(cookieParser());
 app.use(express.json());
@@ -97,7 +97,7 @@ app.post("/RemplireNouvelleDemande", upload.fields, (req, res) => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
-app.use(express.static(__dirname, "public"));
+// app.use(express.static(__dirname, "public"));
 // multer
 
 // Mongodb connection

@@ -27,17 +27,19 @@ export default function Router() {
       children: [
         { path: '', element: <DashboardApp /> },
         // { path: 'users', element: <User /> },
-        // { path: 'demande', element: <Demande /> },
-       // { path: 'users', element: <ALLDemande statue='verfied' /> },
-       
-       (user.role === 'CFA') ? { path: 'demande', element: <ALLDemande statue='preVerfied' /> } : { path: 'demande', element: <NotFound /> },
+        { path: 'demande', element: <Demande /> },
+        // { path: 'users', element: <ALLDemande statue='verfied' /> },
 
-       (user.role === 'VFO') ?  { path: 'demande', element: <ALLDemande statue='pending' /> } : { path: 'demande', element: <NotFound /> },
+        //  (user.role === 'CFA') ? { path: 'demande', element: <ALLDemande statue='preVerfied' /> } : { path: 'demande', element: <NotFound /> },
 
-       (user.role === 'EXP')?  { path: 'demande', element: <Demande /> }: { path: 'demande', element: <NotFound /> },
-       //  (user.role === 'CFA') ? { path: 'demande', element: <ALLDemande statue='preVerfied' /> }:   { path: 'users', element: <Demande /> },
-        (user.role === 'CFA' || user.role ==='VFO') ? { path: 'users', element: <User /> } :   { path: 'users', element: <NotFound /> },
-      //  (user.role === 'VFO') ? { path: 'demande', element: <ALLDemande statue='pending' /> } :   { path: 'users', element: <Demande /> },
+        //  (user.role === 'VFO') ?  { path: 'demande', element: <ALLDemande statue='pending' /> } : { path: 'demande', element: <NotFound /> },
+
+        //  (user.role === 'EXP')?  { path: 'demande', element: <Demande /> }: { path: 'demande', element: <NotFound /> },
+        //  (user.role === 'CFA') ? { path: 'demande', element: <ALLDemande statue='preVerfied' /> }:   { path: 'users', element: <Demande /> },
+        // user.role === 'CFA' || user.role === 'VFO'
+        //   ? { path: 'users', element: <User /> }
+        //   : { path: 'users', element: <NotFound /> },
+        //  (user.role === 'VFO') ? { path: 'demande', element: <ALLDemande statue='pending' /> } :   { path: 'users', element: <Demande /> },
         { path: 'products', element: <Products /> },
         { path: 'blog', element: <Blog /> },
         { path: '*', element: <NotFound /> },

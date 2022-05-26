@@ -17,6 +17,8 @@ export default function App() {
   const { Notify } = useNotification();
   const { setUser, removeUser } = useUser();
   useEffect(() => {
+    var fetch;
+    // if(user.role=="") fetch=getPending
     GetUserData()
       .unwrap()
       .then((user) => {
